@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title> Sistem Informasi Kependudukan </title>
+    <title>Gentellela Alela! | </title>
 
     <!-- Bootstrap -->
     <link href="<?php echo base_url().'assets/'?>vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -18,6 +18,13 @@
 
     <!-- Custom Theme Style -->
     <link href="<?php echo base_url().'assets/'?>build/css/custom.min.css" rel="stylesheet">
+    <link href="<?php echo base_url().'assets/'?>vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+    <!-- Datatables -->
+    <link href="<?php echo base_url().'assets/'?>vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo base_url().'assets/'?>vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo base_url().'assets/'?>vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo base_url().'assets/'?>vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo base_url().'assets/'?>vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
   </head>
 
   <body class="nav-md">
@@ -180,7 +187,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Plain Page</h3>
+                <h3>Data Seluruh Catatan</h3>
               </div>
 
               <div class="title_right">
@@ -201,7 +208,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Plain Page</h2>
+                    <h2>Data Catatan</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -220,44 +227,49 @@
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
-                     <form action="<?php echo site_url("raskin/tambahData")?>" method="post">
-                         <table class="table table-striped">
+                    <?php echo $this->session->flashdata('msg');?>
+                    <?php echo $this->session->flashdata('msg1');?>
+                    <?php echo $this->session->flashdata('msg2');?>
+                    <div class="col-md-7">
+                        <a href="<?php echo site_url('catatan/tambahData')?>" class="btn btn-sm btn-success"><i class="glyphicon glyphicon-plus"></i>Tambah Catatan</a>
+                    </div>
+                       <table class="table table-striped table-bordered">
+                      <thead>
+                        <thead>
                            <tr>
-                            <td>
-                              <div class="form-group-row">
-                                  <label for="example-text-input" class="col-xs-2 col-form-label">Nama Kepala Keluarga</label>
-                                  <div class="col-xs-10">
-                                    <div class="right-inner-addon">
-                                      <input type="text" name="nama_kepala_keluarga" class="form-control" placeholder="Masukkan nama kepala keluarga" value="<?php echo set_value('nama_kepala_keluarga')?>">
-                                    </div>
-                              </div>
-                            </div>
-                              </td>
+                           <th>No</th>
+                           <th>ID User</th>
+                           <th>Nama Pengguna</th>
+                           <th>Password</th>
+                           <th>Aksi</th>
                            </tr>
-                            <tr>
-                            <td>
-                              <div class="form-group-row">
-                                  <label for="example-text-input" class="col-xs-2 col-form-label">Status Bayar</label>
-                                  <div class="col-xs-10">
-                                    <div class="right-inner-addon">
-                                      <select class="selectpicker form-control" name="status_bayar" required>
-                                            <option>Pilih Status Bayar</option>
-                                            <option value="Sudah Membayar">Sudah</option>
-                                            <option value="Belum Membayar">Belum</option>
-                                          </select>
-                                    </div>
-                              </div>
-                            </div>
-                              </td>
-                           </tr>
+                          </thead>
+                          <tbody>
+                          <?php if(empty($user)){ ?>
                            <tr>
-                            <td colspan="2">
-                              <input type="submit" name="submit" class="btn btn-success" value="Simpan">
-                              <button type="reset" class="btn btn-default">Batal</button>
+                            <td colspan="6">Data tidak ditemukan</td>
+                           </tr>
+                          <?php }else{
+                            $no =  $this->uri->segment('3') + 1;
+                            foreach($user as $data){ $no;?>
+                           <tr height="50px">
+                            <td><?php echo $no++?></td>
+                            <td><?php echo $data->id_user?></td>
+                            <td><?php echo $data->username?></td>
+                            <td><?php echo $data->password?></td>
+                            <td width="300px">
+                              <?php echo anchor('user/edit/'.$data->id_user,'<button type="button" class="btn btn-info"><i class="glyphicon glyphicon-pencil"></i>Edit Data</button>');?>
+                             <?php echo anchor('user/delete/'.$data->id_user,'<button type="button" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i>Hapus Data</button>');?>
                             </td>
                            </tr>
-                         </table>
-                       </form>
+                          <?php }}?>
+                          </tbody>
+                    </table>
+                     <div class="row">
+                        <div class="col-md-12 text-center">
+                            <?php echo $this->pagination->create_links(); ?>
+                        </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -278,7 +290,7 @@
     </div>
 
     <!-- jQuery -->
-    <script src="<?php echo base_url().'assets/'?>vendors/jQuery/jQuery-2.2.0.min.js"></script>
+    <script src="<?php echo base_url().'assets/'?>vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
     <script src="<?php echo base_url().'assets/'?>vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- FastClick -->
@@ -288,9 +300,105 @@
     
     <!-- Custom Theme Scripts -->
     <script src="<?php echo base_url().'assets/'?>build/js/custom.min.js"></script>
-   
+     <!-- iCheck -->
+    <script src="<?php echo base_url().'assets/'?>vendors/iCheck/icheck.min.js"></script>
+    <!-- Datatables -->
+    <script src="<?php echo base_url().'assets/'?>vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="<?php echo base_url().'assets/'?>vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script src="<?php echo base_url().'assets/'?>vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="<?php echo base_url().'assets/'?>vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+    <script src="<?php echo base_url().'assets/'?>vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="<?php echo base_url().'assets/'?>vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="<?php echo base_url().'assets/'?>vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="<?php echo base_url().'assets/'?>vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+    <script src="<?php echo base_url().'assets/'?>vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+    <script src="<?php echo base_url().'assets/'?>vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="<?php echo base_url().'assets/'?>vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+    <script src="<?php echo base_url().'assets/'?>vendors/datatables.net-scroller/js/datatables.scroller.min.js"></script>
+    <script src="<?php echo base_url().'assets/'?>vendors/jszip/dist/jszip.min.js"></script>
+    <script src="<?php echo base_url().'assets/'?>vendors/pdfmake/build/pdfmake.min.js"></script>
+    <script src="<?php echo base_url().'assets/'?>vendors/pdfmake/build/vfs_fonts.js"></script>
+
+    <!-- Datatables -->
+    <script>
+      $(document).ready(function() {
+        var handleDataTableButtons = function() {
+          if ($("#datatable-buttons").length) {
+            $("#datatable-buttons").DataTable({
+              dom: "Bfrtip",
+              buttons: [
+                {
+                  extend: "copy",
+                  className: "btn-sm"
+                },
+                {
+                  extend: "csv",
+                  className: "btn-sm"
+                },
+                {
+                  extend: "excel",
+                  className: "btn-sm"
+                },
+                {
+                  extend: "pdfHtml5",
+                  className: "btn-sm"
+                },
+                {
+                  extend: "print",
+                  className: "btn-sm"
+                },
+              ],
+              responsive: true
+            });
+          }
+        };
+
+        TableManageButtons = function() {
+          "use strict";
+          return {
+            init: function() {
+              handleDataTableButtons();
+            }
+          };
+        }();
+
+        $('#datatable').dataTable();
+
+        $('#datatable-keytable').DataTable({
+          keys: true
+        });
+
+        $('#datatable-responsive').DataTable();
+
+        $('#datatable-scroller').DataTable({
+          ajax: "js/datatables/json/scroller-demo.json",
+          deferRender: true,
+          scrollY: 380,
+          scrollCollapse: true,
+          scroller: true
+        });
+
+        $('#datatable-fixed-header').DataTable({
+          fixedHeader: true
+        });
+
+        var $datatable = $('#datatable-checkbox');
+
+        $datatable.dataTable({
+          'order': [[ 1, 'asc' ]],
+          'columnDefs': [
+            { orderable: false, targets: [0] }
+          ]
+        });
+        $datatable.on('draw.dt', function() {
+          $('input').iCheck({
+            checkboxClass: 'icheckbox_flat-green'
+          });
+        });
+
+        TableManageButtons.init();
       });
     </script>
-    <!-- /validator -->
+    <!-- /Datatables -->
   </body>
 </html>

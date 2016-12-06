@@ -50,7 +50,7 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
-                  <li><a href="<?php echo site_url('home/index')?>"><i class="fa fa-home"></i> Home </a>
+                  <li><a href="<?php echo site_url('home/dashboard')?>"><i class="fa fa-home"></i> Home </a>
                   </li>
                   <li><a><i class="fa fa-edit"></i> Data Master <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
@@ -60,7 +60,7 @@
                       <li><a href="<?php echo site_url('catatan/index')?>">Catatan</a></li>
                     </ul>
                   </li>
-                   <li><a><i class="fa fa-user"></i> Manajemen User </a>
+                   <li><a href="<?php echo site_url('user/index')?>"><i class="fa fa-user"></i> Manajemen User </a>
                 </ul>
               </div>
               <div class="menu_section">
