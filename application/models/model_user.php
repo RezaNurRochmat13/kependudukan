@@ -49,7 +49,7 @@ class model_user extends CI_Model{
 
 	public function delete($where,$table){
 		$this->db->where($where);
-		$this->db->update($table);
+		$this->db->delete($table);
 	}
 }
 

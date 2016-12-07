@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Gentellela Alela! | </title>
+    <title> Sistem Informasi Kependudukan </title>
 
     <!-- Bootstrap -->
     <link href="<?php echo base_url().'assets/'?>vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -187,17 +187,11 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Data Seluruh Catatan</h3>
+                <h3>Data Seluruh Pengguna</h3>
               </div>
 
               <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                  <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
-                    <span class="input-group-btn">
-                      <button class="btn btn-default" type="button">Go!</button>
-                    </span>
-                  </div>
                 </div>
               </div>
             </div>
@@ -208,7 +202,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Data Catatan</h2>
+                    <h2>Data Pengguna</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -231,7 +225,7 @@
                     <?php echo $this->session->flashdata('msg1');?>
                     <?php echo $this->session->flashdata('msg2');?>
                     <div class="col-md-7">
-                        <a href="<?php echo site_url('catatan/tambahData')?>" class="btn btn-sm btn-success"><i class="glyphicon glyphicon-plus"></i>Tambah Catatan</a>
+                        <a href="<?php echo site_url('user/tambahData')?>" class="btn btn-sm btn-success"><i class="glyphicon glyphicon-plus"></i>Tambah Pengguna</a>
                     </div>
                        <table class="table table-striped table-bordered">
                       <thead>

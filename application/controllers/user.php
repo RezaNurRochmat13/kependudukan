@@ -58,6 +58,8 @@ class user extends CI_Controller{
 			$this->session->set_flashdata("msg",$msg);
 			redirect('user/index');
 		}
+
+		$this->load->view('view_tambah_user');
 	}
 
 	public function edit($id){

@@ -180,7 +180,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Form Catatan</h3>
+                <h3>Form Pengguna</h3>
               </div>
 
               <div class="title_right">
@@ -195,7 +195,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Form Tambah Catatan</h2>
+                    <h2>Form Ubah Pengguna</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -214,15 +214,17 @@
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
-                     <form action="<?php echo site_url("catatan/tambahData")?>" method="post">
+                    <?php foreach($edit_user as $edit) {?>
+                     <form action="<?php echo base_url(). 'index.php/user/update';?>" method="post">
                          <table class="table table-striped">
                            <tr>
                             <td>
                               <div class="form-group-row">
-                                  <label for="example-text-input" class="col-xs-2 col-form-label">Nama Catatan</label>
+                                  <label for="example-text-input" class="col-xs-2 col-form-label">Username</label>
                                   <div class="col-xs-10">
                                     <div class="right-inner-addon">
-                                      <input type="text" name="nama_catatan" class="form-control" placeholder="Masukkan nama catatan" value="<?php echo set_value('nama_catatan')?>">
+                                      <input type="hidden" name="id_user" value="<?php echo $edit->id_user?>">
+                                      <input type="text" name="username" class="form-control" placeholder="Masukkan username" value="<?php echo $edit->username?>">
                                     </div>
                               </div>
                             </div>
@@ -231,10 +233,10 @@
                             <tr>
                             <td>
                               <div class="form-group-row">
-                                  <label for="example-text-input" class="col-xs-2 col-form-label">Keterangan Catatan</label>
+                                  <label for="example-text-input" class="col-xs-2 col-form-label">Password</label>
                                   <div class="col-xs-10">
                                     <div class="right-inner-addon">
-                                      <input type="text" name="keterangan_catatan" class="form-control" placeholder="Masukkan keterangan catatan" value="<?php echo set_value('keterangan_catatan')?>">
+                                      <input type="password" name="password" class="form-control" placeholder="Masukkan password" value="<?php echo $edit->password?>">
                                     </div>
                               </div>
                             </div>
@@ -248,6 +250,7 @@
                            </tr>
                          </table>
                        </form>
+                       <?php }?>
                   </div>
                 </div>
               </div>

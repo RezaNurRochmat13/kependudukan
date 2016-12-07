@@ -55,7 +55,7 @@ class kependudukan extends CI_Controller{
 	public function tambahData(){
 		if($this->input->post('submit')){
 			$this->model_kependudukan->tambahData();
-			$msg="<div class='alert alet-success'>Penambahan Data Kependudukan Berhasil</div>";
+			$msg="<div class='alert alert-success'>Penambahan Data Kependudukan Berhasil</div>";
 			$this->session->set_flashdata("msg",$msg);
 			redirect('kependudukan/index');
 		}
