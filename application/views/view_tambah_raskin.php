@@ -214,6 +214,7 @@
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
+                    <?php echo validation_errors()?>
                      <form action="<?php echo site_url("raskin/tambahData")?>" method="post">
                          <table class="table table-striped">
                            <tr>

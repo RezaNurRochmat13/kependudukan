@@ -214,6 +214,7 @@
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
+                    <?php echo validation_errors()?>
                     <?php foreach($edit_raskin as $edit) {?>
                      <form action="<?php echo base_url(). 'index.php/raskin/update';?>" method="post">
                          <table class="table table-striped">
@@ -224,7 +225,7 @@
                                   <div class="col-xs-10">
                                     <div class="right-inner-addon">
                                       <input type="hidden" name="id_penerima" value="<?php echo $edit->id_penerima?>">
-                                      <input type="text" name="nama_kepala_keluarga" class="form-control" placeholder="Masukkan nama kepala keluarga" value="<?php echo $edit->nama_kepala_keluarga?>">
+                                      <input type="text" name="nama_kepala_keluarga" class="form-control" placeholder="Masukkan nama kepala keluarga" value="<?php echo $edit->nama_kepala_keluarga?>" required>
                                     </div>
                               </div>
                             </div>

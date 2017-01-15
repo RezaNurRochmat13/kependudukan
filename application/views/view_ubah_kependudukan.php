@@ -215,6 +215,7 @@
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
+                    <?php echo validation_errors()?>
                     <?php foreach($penduduk as $key) { ?>
                      <form action="<?php echo base_url(). 'index.php/kependudukan/update';?>" method="post">
                          <table class="table table-striped">
@@ -245,7 +246,7 @@
                            </tr>
                             <tr>
                             <td>
-                               <label for="example-text-input" class="col-xs-2 col-form-label">Jenis Kelamin</label>
+                               <label for="example-text-input" class="col-xs-2 col-form-label" required>Jenis Kelamin</label>
                                 <div class="col-xs-10">
                                           <select class="selectpicker form-control" name="jenis_kelamin" required>
                                             <option>Pilih Jenis Kelamin</option>

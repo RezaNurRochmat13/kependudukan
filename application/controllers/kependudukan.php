@@ -17,6 +17,7 @@ class kependudukan extends CI_Controller{
 		$this->load->helper('form');
 		$this->load->library('pagination');
 		$this->load->library('session');
+		$this->load->library('form_validation');
 		$this->load->model('model_kependudukan');
 	}
 
@@ -52,7 +53,7 @@ class kependudukan extends CI_Controller{
 		$this->load->view('view_kependudukan',$data);
 	}
 
-	public function tambahData(){
+/*	public function tambahData(){
 		if($this->input->post('submit')){
 			$this->model_kependudukan->tambahData();
 			$msg="<div class='alert alert-success'>Penambahan Data Kependudukan Berhasil</div>";
@@ -61,6 +62,39 @@ class kependudukan extends CI_Controller{
 		}
 
 		$this->load->view('view_tambah_kependudukan');
+	}*/
+
+	public function tambahData(){
+		$this->form_validation->set_rules('nama_lengkap','Nama Lengkap','required');
+		$this->form_validation->set_rules('nomor_induk_kependudukan','Nomor Induk Kependudukan','required');
+		$this->form_validation->set_rules('jenis_kelamin','Jenis Kelamin','required');
+		$this->form_validation->set_rules('tempat_lahir','Tempat Lahir','required');
+		$this->form_validation->set_rules('tanggal_lahir','Tanggal Lahir','required');
+		$this->form_validation->set_rules('agama','Agama','required');
+		$this->form_validation->set_rules('jenjang_pendidikan','Jenjang Pendidikan','required');
+		$this->form_validation->set_rules('pekerjaan','Pekerjaan','required');
+		$this->form_validation->set_rules('nama_kepala_keluarga','Nama Kepala Keluarga','required');
+		$this->form_validation->set_rules('status_perkawinan','Status Perkawinan','required');
+		$this->form_validation->set_rules('hubungan_dalam_keluarga','Hubungan Dalam Keluarga','required');
+		$this->form_validation->set_rules('kewarnegaraan','Kewarnegaraan','required');
+		$this->form_validation->set_rules('nomor_paspor_kitap','Nomor Paspor Atau Kitap','required');
+		$this->form_validation->set_rules('nama_ayah','Nama Ayah','required');
+		$this->form_validation->set_rules('nama_ibu','Nama Ibu','required');
+		
+		if($this->form_validation->run() == FALSE){
+			$this->load->view('view_tambah_kependudukan');
+		}	
+
+		else{
+
+			$this->model_kependudukan->tambahData();
+			$msg="<div class='alert alert-success'>Penambahan Data Kependudukan Berhasil</div>";
+			$this->session->set_flashdata("msg",$msg);
+			redirect('kependudukan/index');
+
+		}
+
+
 	}
 
 	public function edit($id){
@@ -108,10 +142,33 @@ class kependudukan extends CI_Controller{
 		$where = array(
 			'id_umum' => $id_umum
 			);
+
+		$this->form_validation->set_rules('nama_lengkap','Nama Lengkap','required');
+		$this->form_validation->set_rules('nomor_induk_kependudukan','Nomor Induk Kependudukan','required');
+		$this->form_validation->set_rules('jenis_kelamin','Jenis Kelamin','required');
+		$this->form_validation->set_rules('tempat_lahir','Tempat Lahir','required');
+		$this->form_validation->set_rules('tanggal_lahir','Tanggal Lahir','required');
+		$this->form_validation->set_rules('agama','Agama','required');
+		$this->form_validation->set_rules('jenjang_pendidikan','Jenjang Pendidikan','required');
+		$this->form_validation->set_rules('pekerjaan','Pekerjaan','required');
+		$this->form_validation->set_rules('nama_kepala_keluarga','Nama Kepala Keluarga','required');
+		$this->form_validation->set_rules('status_perkawinan','Status Perkawinan','required');
+		$this->form_validation->set_rules('hubungan_dalam_keluarga','Hubungan Dalam Keluarga','required');
+		$this->form_validation->set_rules('kewarnegaraan','Kewarnegaraan','required');
+		$this->form_validation->set_rules('nomor_paspor_kitap','Nomor Paspor Atau Kitap','required');
+		$this->form_validation->set_rules('nama_ayah','Nama Ayah','required');
+		$this->form_validation->set_rules('nama_ibu','Nama Ibu','required');
+
+		if($this->form_validation->run() == FALSE){
+			$this->load->view('view_ubah_kependudukan');
+		}
+
+		else{
 		$this->model_kependudukan->update_data($where,$data,'umum');
 		$msg1="<div class='alert alert-info'>Pengubahan Data Kependudukan Berhasil</div>";
 		$this->session->set_flashdata("msg1",$msg1);
 		redirect('kependudukan/index');
+		}
 	}
 
 	public function delete($id){

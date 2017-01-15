@@ -16,6 +16,7 @@ class raskin extends CI_Controller{
 		$this->load->helper('url');
 		$this->load->library('pagination');
 		$this->load->library('session');
+		$this->load->library('form_validation');
 		$this->load->model('model_raskin');
 	}
 
@@ -51,7 +52,7 @@ class raskin extends CI_Controller{
 		$this->load->view('view_raskin',$data);
 	}
 
-	public function tambahData(){
+	/*public function tambahData(){
 		if($this->input->post('submit')){
 			$this->model_raskin->tambahData();
 			$msg = "<div class='alert alert-success'> Penambahan Data Raskin Telah Berhasil</div>";
@@ -60,6 +61,26 @@ class raskin extends CI_Controller{
 		}
 
 		$this->load->view('view_tambah_raskin');
+	}
+*/
+
+	public function tambahData(){
+		$this->form_validation->set_rules('nama_kepala_keluarga','Nama Kepala Keluarga','required');
+		$this->form_validation->set_rules('status_bayar','Ststus Bayar','required');
+
+		if($this->form_validation->run() == FALSE){
+			$this->load->view('view_tambah_raskin');
+
+		}
+
+		else{
+			$this->model_raskin->tambahData();
+			$msg = "<div class='alert alert-success'> Penambahan Data Raskin Telah Berhasil</div>";
+			$this->session->set_flashdata("msg",$msg);
+			redirect('raskin/index');
+
+		}
+
 	}
 
 	public function edit($id){
@@ -82,10 +103,21 @@ class raskin extends CI_Controller{
 			'id_penerima' => $id_penerima
 			);
 
+		$this->form_validation->set_rules('nama_kepala_keluarga','Nama Kepala Keluarga','required');
+		$this->form_validation->set_rules('status_bayar','Status Bayar','required');
+
+		if($this->form_validation->run() == FALSE){
+			$this->load->view('view_ubah_raskin',$data);
+
+		}
+
+		else{
+
 		$this->model_raskin->update_data($where,$data,'raskin');
 		$msg1="<div class='alert alert-info'>Pengubahan Data Raskin Telah Berhasil</div>";
 		$this->session->set_flashdata("msg1",$msg1);
 		redirect('raskin/index');
+		}
 	}
 
 	public function delete($id){
